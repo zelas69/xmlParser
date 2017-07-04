@@ -139,10 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="xmlParser.h" />
+    <ClInclude Include="xmlException.h" />
+    <ClInclude Include="xmlGlobal.h" />
+    <ClInclude Include="xmlNode.h" />
+    <ClInclude Include="xmlTree.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="xmlParser.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="xmlException.cpp" />
+    <ClCompile Include="xmlGlobal.cpp" />
+    <ClCompile Include="xmlNode.cpp" />
+    <ClCompile Include="xmlTree.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
