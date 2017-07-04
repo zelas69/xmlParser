@@ -10,6 +10,10 @@ using std::istream;
 namespace {
     //enum class
     enum {OPEN, CLOSE, SINGLE};
+    const char OPEN_BRACKET = '<';
+    const char CLOSE_BRACKET = '>';
+    const char SPACE = ' ';
+    const char SLASH = '/';
 }
 
 namespace XMLPARSER {
@@ -22,35 +26,7 @@ namespace XMLPARSER {
         }
     }
 
-    bool cTagStack::empty() const {
-        return tags_.empty();
-    }
-
-    void cTagStack::push(const std::string& tag) {
-        tags_.push_back(tag);
-    }
-
-    void cTagStack::pop() {
-        tags_.pop_back();
-    }
-
-    string cTagStack::extract_tag(const string &line) {
-        size_t tag_start_index = line.find_first_of(OPEN_BRACKET) + 1;
-        size_t tag_end_index = line.find_first_of(SPACE, tag_start_index);
-        
-        // ?????????????
-        if (tag_end_index == line.size()) {
-            tag_end_index == line.size() - 1;
-        }
-        string tag = line.substr(tag_start_index, tag_end_index - tag_start_index);
-        
-        if (line[line.find_last_of(CLOSE_BRACKET) - 1] == SLASH) {
-            tag = tag + SLASH;
-        }
-        return tag;
-    }
-
-    int cTagStack::check_tag(std::string &tag) const {
+    int check_tag(std::string &tag) const {
         if (tag[0] == SLASH) {
             tag = tag.substr(1);
             return CLOSE;
@@ -61,6 +37,34 @@ namespace XMLPARSER {
             return SINGLE;
         }
         return OPEN;
+    }
+
+    string extract_tag(const string &line) {
+        size_t tag_start_index = line.find_first_of(OPEN_BRACKET) + 1;
+        size_t tag_end_index = line.find_first_of(SPACE, tag_start_index);
+
+        // ?????????????
+        if (tag_end_index == line.size()) {
+            tag_end_index == line.size() - 1;
+        }
+        string tag = line.substr(tag_start_index, tag_end_index - tag_start_index);
+
+        if (line[line.find_last_of(CLOSE_BRACKET) - 1] == SLASH) {
+            tag = tag + SLASH;
+        }
+        return tag;
+    }
+
+    bool cTagStack::empty() const {
+        return tags_.empty();
+    }
+
+    void cTagStack::push(const std::string& tag) {
+        tags_.push_back(tag);
+    }
+
+    void cTagStack::pop() {
+        tags_.pop_back();
     }
 
     bool cTagStack::match_top(const std::string& tag) {
@@ -136,19 +140,17 @@ namespace XMLPARSER {
         cTagStack tag_stack;
 
         for (size_t line_number = 0; line_number < data_.size(); ++line_number) {
-            string tag = tag_stack.extract_tag(data_[line_number]);
-            int tag_type = tag_stack.check_tag(tag);
+            string tag = extract_tag(data_[line_number]);
+            int tag_type = check_tag(tag);
             
             if (tag_type == CLOSE) {
                 if (tag_stack.match_top(tag)) {
                     go_to_parent();
-                }
-                else {
+                } else {
                     //error!!!
                     return false;
                 }
-            }
-            else {
+            } else {
                 cXMLnode *new_node = new cXMLnode(&data_[line_number], current_);
                 current_->add_child(new_node);
 

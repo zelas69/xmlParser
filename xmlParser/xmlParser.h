@@ -16,13 +16,13 @@ typedef unsigned short ushort;
 namespace XMLPARSER {
     void get_lines_from_fstream(std::ifstream &stream, std::vector<std::string> &file_lines);
 
+    int check_tag_type(std::string &tag);
+
+    std::string extract_tag(const std::string &line);
+
     class cTagStack {
     private:
         std::vector<std::string> tags_;
-        const char OPEN_BRACKET = '<';
-        const char CLOSE_BRACKET = '>';
-        const char SPACE = ' ';
-        const char SLASH = '/';
 
     public:
         bool empty() const;
@@ -30,10 +30,6 @@ namespace XMLPARSER {
         void push(const std::string& tag);
 
         void pop();
-
-        std::string extract_tag(const std::string &line);
-
-        int check_tag(std::string &tag) const;
 
         bool match_top(const std::string &tag);
     };
@@ -89,4 +85,4 @@ namespace XMLPARSER {
     };
 }
 
-#endif // XML_PARSER_H
+#endif  XML_PARSER_H
