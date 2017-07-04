@@ -13,6 +13,7 @@ namespace XMLPARSER {
         cXMLexception& operator= (const cXMLexception&) throw();
         virtual ~cXMLexception() throw() {};
         virtual const char* what() const throw();
+        friend void swap(cXMLexception &left, cXMLexception &right);
     };
 }
 

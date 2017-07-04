@@ -1,6 +1,7 @@
 #include "xmlGlobal.h"
 #include "xmlTree.h"
 #include "xmlNode.h"
+#include "xmlException.h"
 
 using std::vector;
 using std::string;
@@ -66,7 +67,7 @@ namespace XMLPARSER {
                     go_to_parent();
                 } else {
                     //error!!!
-                    return false;
+                    throw cXMLexception("ERROR!");
                 }
             } else {
                 cXMLnode *new_node = new cXMLnode(&data_[line_number], current_);

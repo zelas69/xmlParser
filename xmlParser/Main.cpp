@@ -1,5 +1,6 @@
 #include "xmlTree.h"
 #include "xmlGlobal.h"
+#include "xmlException.h"
 #include <iostream>
 
 using std::ifstream;
@@ -9,14 +10,22 @@ using std::string;
 
 int main() {
     using namespace XMLPARSER;
+    try {
+        const string path = "E:\\Work\\main\\grandsmeta_xml_smeta\\пример сметы для XML.xml";
+        ifstream infile(path);
+        vector<string> file_lines;
+        get_lines_from_fstream(infile, file_lines);
 
-    const string path = "E:\\Work\\main\\grandsmeta_xml_smeta\\пример сметы для XML.xml";
-    ifstream infile(path);
-    vector<string> file_lines;
-    get_lines_from_fstream(infile, file_lines);
+        cXMLtree xml_tree(file_lines);
+        xml_tree.build_tree();
+    }
+    catch (const cXMLexception& exception) {
+        cout << exception.what() << '\n';
+    }
 
-    cXMLtree xml_tree(file_lines);
-    cout << xml_tree.build_tree() << '\n';
+    catch (...) {
+        cout << "Other exception!\n";
+    }
 
     //for (size_t i = 0; i < file_lines.size(); ++i) {
     //  cout << file_lines[i] << '\n';

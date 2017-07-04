@@ -1,4 +1,5 @@
 #include "xmlException.h"
+#include <iostream>
 
 namespace XMLPARSER {
     cXMLexception::cXMLexception(const std::string &exception_text) throw() : exception_text_(exception_text) {}
@@ -7,11 +8,15 @@ namespace XMLPARSER {
 
     cXMLexception& cXMLexception::operator= (const cXMLexception &exception) throw() {
         cXMLexception tmp(exception);
-        std::swap(*this, tmp);
+        swap(*this, tmp);
         return *this;
     }
 
     const char* cXMLexception::what() const throw() {
         return exception_text_.c_str();
+    }
+
+    void swap(cXMLexception &left, cXMLexception &right) {
+        left.exception_text_.swap(right.exception_text_);
     }
 }
