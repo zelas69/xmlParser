@@ -26,7 +26,7 @@ namespace XMLPARSER {
         return children_[index];
     }
 
-    void cXMLnode::add_child(cXMLnode *child) {
+    void cXMLnode::add_child(cXMLnode* child) {
         //        cout << *child->data_ << '\n';
         children_.push_back(child);
     }

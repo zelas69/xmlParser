@@ -13,11 +13,11 @@ namespace XMLPARSER {
     //enum class
     enum { OPEN, CLOSE, SINGLE };
 
-    void get_lines_from_fstream(std::ifstream &stream, std::vector<std::string> &file_lines);
+    void get_lines_from_fstream(std::ifstream* stream, std::vector<std::string>* file_lines);
 
-    std::string extract_tag(const std::string &line);
+    std::string extract_tag(const std::string& line);
 
-    int check_tag_type(std::string &tag);
+    int check_tag_type(std::string& tag); //!!@#!@#!@$!@$!@$@!#!@!#!#@!@#@!#!@#!@#@!#@!##@!$#@!!$^#^$#!^!#$^$
 }
 
 #endif  XML_GLOBAL_H

@@ -12,16 +12,16 @@ namespace {
 }
 
 namespace XMLPARSER {
-    void get_lines_from_fstream(ifstream &stream, vector<string> &file_lines) {
+    void get_lines_from_fstream(ifstream* stream, vector<string>* file_lines) {
         string file_line;
 
-        while (!stream.eof()) {
-            getline(stream, file_line);
-            file_lines.push_back(file_line);
+        while (!(*stream).eof()) {
+            getline((*stream), file_line);
+            file_lines->push_back(file_line);
         }
     }
 
-    string extract_tag(const string &line) {
+    string extract_tag(const string& line) {
         size_t tag_start_index = line.find_first_of(OPEN_BRACKET) + 1;
         size_t tag_end_index = line.find_first_of(SPACE, tag_start_index);
 
@@ -37,7 +37,7 @@ namespace XMLPARSER {
         return tag;
     }
 
-    int check_tag_type(std::string &tag) {
+    int check_tag_type(std::string& tag) {
         if (tag[0] == SLASH) {
             tag = tag.substr(1);
             return CLOSE;

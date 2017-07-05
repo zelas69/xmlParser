@@ -27,8 +27,8 @@ namespace XMLPARSER {
         return false;
     }
 
-    cXMLtree::cXMLtree(std::vector<std::string>& file_lines) {
-        data_.swap(file_lines);
+    cXMLtree::cXMLtree(std::vector<std::string>* file_lines) {
+        data_.swap(*file_lines);
         head_ = new cXMLnode();
         current_ = head_;
     }
@@ -46,7 +46,7 @@ namespace XMLPARSER {
         return current_;
     }
 
-    cXMLnode* cXMLtree::go_to_child(const size_t &index) {
+    cXMLnode* cXMLtree::go_to_child(size_t index) {
         current_ = current_->get_child(index);
         return current_;
     }

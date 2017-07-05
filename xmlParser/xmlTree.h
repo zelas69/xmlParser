@@ -34,12 +34,12 @@ namespace XMLPARSER {
 
         cXMLnode* go_to_head();
 
-        cXMLnode* go_to_child(const size_t &index);
+        cXMLnode* go_to_child(size_t index);
 
         cXMLnode* go_to_parent();
 
     public:
-        cXMLtree(std::vector<std::string>& file_lines);   // swap
+        cXMLtree(std::vector<std::string>* file_lines);
 
         ~cXMLtree();
 

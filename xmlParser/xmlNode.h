@@ -20,7 +20,7 @@ namespace XMLPARSER {
     public:
         ~cXMLnode();
 
-        cXMLnode(std::string *data=NULL, cXMLnode *parent=NULL);
+        cXMLnode(std::string* data=NULL, cXMLnode* parent=NULL);
 
         size_t get_number_of_children() const;
 
@@ -28,9 +28,9 @@ namespace XMLPARSER {
 
         std::vector<cXMLnode*>& get_children();
 
-        cXMLnode* get_child(const size_t &index) const;
+        cXMLnode* get_child(const size_t& index) const;
 
-        void add_child(cXMLnode *child);
+        void add_child(cXMLnode* child);
 
         std::map<std::string, std::string> extract_params();
     };

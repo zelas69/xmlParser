@@ -14,9 +14,9 @@ int main() {
         const string path = "E:\\Work\\main\\grandsmeta_xml_smeta\\пример сметы для XML.xml";
         ifstream infile(path);
         vector<string> file_lines;
-        get_lines_from_fstream(infile, file_lines);
+        get_lines_from_fstream(&infile, &file_lines);
 
-        cXMLtree xml_tree(file_lines);
+        cXMLtree xml_tree(&file_lines);
         xml_tree.build_tree();
     }
     catch (const cXMLexception& exception) {
